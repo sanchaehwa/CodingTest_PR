@@ -1,17 +1,29 @@
 import java.util.*;
 
 class Solution {
-    public int[] solution(int[] progress, int[] speeds){
-        int[] answer;
+    public int[] solution(int[] progresses, int[] speeds){
+        List<Integer> result = new ArrayList<>();
         Queue<Integer> queue = new LinkedList<>();
-        for(int i=0; i<progress.length; i++)
-            queue.add(progress[i]);
-            System.out.println(queue);
+        for(int i=0; i < progresses.length; i++) {
+            int days = (int)Math.ceil((100.0 - progresses[i]) / speeds[i] ); // 각 작업이 완료되는 일수를 계산하여 큐에 추가 (반올림)
+            queue.add(days);
+        } //queue 로 작업완료일수 저장
+        while(!queue.isEmpty()) {
+            int day = queue.poll();
+            //첫번째 작업의 완료 일수를 가져옴
+            int count = 1;
+            
+            while (!queue.isEmpty() && queue.peek() <= day) {
+                queue.poll();
+                count++;
+            }
+            result.add(count);
+        }
+        int [] answer = new int[result.size()];
+        for (int i = 0; i < result.size(); i++){
+            answer[i] = result.get(i);
+        }
+        return answer;
     }
-    return answer;
 }
-/*문제 해결 
-1. progress들을 담을 큐를 생성함.
-2. ArrayLists 최종적으로 몇개의 기능이 배포되는지를 담을 count 배열을 만들어줌. 
-3. queue에 프로세스가 있을때까지 반복문을 돌리게 한다. 
-4. index */
+//두번째 기능이 먼저 개발되었다면, 첫번째 기능이 개발된 이후에 함께 배포
