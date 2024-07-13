@@ -5,7 +5,7 @@ class Solution {
     int answer = 0;
     Queue<Integer> bridge = new LinkedList<>();
         for (int i=0; i<bridge_length; i++){
-            bridge.offer(0); //birdge_length만큼의 크기를 갖는 큐생성, 초깃값으로 0을 채워줌
+            bridge.offer(0); //birdge_length만큼의 크기를 갖는 큐생성, 초기값으로 0을 채워줌
         }
         //다리에 트럭이 최대 올라갈 수 있는 수가 1(kg) // 한번에 하나의 트럭만 건널수 있음.
         //특수 경우 처리
