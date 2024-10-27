@@ -13,10 +13,10 @@ public class Main{
           //true 로 초기화 == 모든 수가 소수일 가능성을 염두해두고 시작함. 
               isNumbers[i] = true;
           }
-         //에라토스테네스 체 알고리즘
+         //에라토스테네스 체 알고리즘 : 소수를 찾을 때 숫자의 제곱근까지만 확인한다
          for (int i = 2; i * i <=N; i++){
              if(isNumbers[i]){
-             //배수는 false
+             // 소수를 찾을때 그 소수의 배수를 지우면 소수만이 남으니깐 배수는 false로 처리
                  for(int j = i * i; j <= N; j+= i){
                      isNumbers[j] = false;
                  }
