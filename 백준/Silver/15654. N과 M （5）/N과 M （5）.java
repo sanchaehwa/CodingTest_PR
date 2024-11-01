@@ -1,46 +1,47 @@
+//N - M 자연수가 주어졌을때, 중복되는 수열을 여러번 출력하면 안되며, 길이가 M인 수열을 모두 구해라
 import java.util.*;
 
 public class Main {
+    //공통 변수 선언
     static int M;
     static int[] numbers;
-    static boolean[] visited;
-    static int[] result; // 현재 선택된 숫자 저장
-    //static StringBuilder sb = new StringBuilder();
-
+    static boolean[] visited; 
+    static int[] result;
+    //입력(<- 벡트레이킹을 수행하기 위해) 과 출력 (<- 백트레이킹 수행한 결과를)
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt(); // 4
-        M = sc.nextInt(); //2
-
-        numbers = new int[N]; // 사용할 숫자를 입력받음(4개의 숫자를 입력받고)
-        for (int i = 0; i < N; i++) {
-            numbers[i] = sc.nextInt(); // 0 ~ 3까지 숫자를 입력
+        int N = sc.nextInt(); //입력받을 숫자 길이
+        M = sc.nextInt(); //depth
+        
+        numbers = new int[N];
+        for (int i=0; i < N; i++){
+            numbers[i] = sc.nextInt();
         }
-        Arrays.sort(numbers); // 입력된 숫자를 오름차순 정렬
+        //오름차순 정렬 
+        Arrays.sort(numbers);
         visited = new boolean[N+1];
         result = new int[M];
-
+        
         backtrack(0);
-       // System.out.println(sb.toString());
+ 
     }
-
-    public static void backtrack( int depth) {
-        if (depth == M) { // 깊이가 M일 때 결과 저장
-            for (int i = 0; i < M; i++) {
+    
+    //백트레이킹 수행
+    public static void backtrack(int depth) {
+        if(depth == M){
+            for(int i = 0; i < M; i++) {
                 System.out.print(result[i] + " ");
-            } //현재문자열 끝에 문자열 추가
+            }
             System.out.println();
             return;
         }
-
-        for (int i = 0; i < numbers.length; i++) {
-           if (!visited[i]) { //방문하지않은 조건
-               visited[i] = true;
-               result[depth] = numbers[i];
-               backtrack(depth + 1);
-               visited[i] = false;
-
-           }
+        for(int i = 0; i < numbers.length; i++) {
+            if(!visited[i]) {
+                visited[i] = true;
+                result[depth] = numbers[i];
+                backtrack(depth + 1);
+                visited[i] = false;
+            }
         }
     }
 }
